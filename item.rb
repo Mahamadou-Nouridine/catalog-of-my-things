@@ -9,7 +9,7 @@ class Item
     @publish_date = publish_date
     @archived = archived
   end
-  
+
   def add_source(source)
     @source = source
   end
