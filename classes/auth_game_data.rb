@@ -21,7 +21,3 @@ class AuthorGame
     puts 'Error!'
   end
 end
-
-dec = AuthorGame.new
-dec.save('game.json', 'GTA')
-dec.save('author.json', { 'name' => 'Safari', 'second' => 'Hamuli', 'item' => [1, 1, 2, 3, 4, 5] })
