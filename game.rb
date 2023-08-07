@@ -1,4 +1,5 @@
-# require_relative 'item'
+require './item'
+require 'date'
 
 class Game
   def initialize(multiplayer, last_played)
@@ -7,11 +8,12 @@ class Game
   end
 
   def can_be_archived?
-    return true if (Time.now.year - @last_played_at) > 2  and Item.new(@last_played_at).can_be_archived?
+    last_date = Date.parse(@last_played_at)
+    return true if (Time.now.year - last_date.year) > 2 and Item.new(last_date).can_be_archived?
 
     false
   end
 end
 
-df = Game.new(true, 2010)
+df = Game.new(true, '2010-2-2')
 puts df.can_be_archived?
