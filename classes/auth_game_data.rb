@@ -14,7 +14,13 @@ class AuthorGame
     file = File.open(file, 'w')
     data_from_file = [] unless data_from_file.is_a?(Array)
 
-    data_from_file.push(data)
+    unless data.is_a?(Array)
+      data_from_file.push(data)
+      file.write JSON.dump(data_from_file)
+      return file.close
+    end
+
+    data_from_file.concat(data)
     file.write JSON.dump(data_from_file)
     file.close
   rescue StandardError
