@@ -7,14 +7,15 @@ class App
     @genres=[]
   end
 
-  def add_music
+  def add_music_album
     puts 'Publication date'
     publish_date = gets.chomp
-    print 'Is the Music on spotify? [y/n]'
+    print 'Is the Music album on spotify? [y/n]'
     on_spotify = (gets.chomp.to_s).downcase
-    puts 'Out of range' if !on_spotify.in?(['y', 'n'])
+    puts 'Out of range' if !['y', 'n'].include?(on_spotify)
     on_spotif = on_spotify === 'y'
-    music = MusicAlbum.new(publish_date, on_spotif)
+    music = MusicAlbum.new(publish_date, on_spotify: on_spotif)
     @musics << music
+    puts "Music album added successfully!"
   end
 end
