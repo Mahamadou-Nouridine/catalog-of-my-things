@@ -2,6 +2,7 @@ require_relative 'app'
 
 Options = {
   '1' => 'add_music_album',
+  '2' => 'List all Music albums',
   '10' => 'Quit'
 }
 
@@ -15,6 +16,8 @@ def main
     case user_option
     when '1'
       app.add_music_album
+    when '2'
+      app.list_music_albums
     when '10'
       puts 'Bye bye, see you again!'
       exit

@@ -18,4 +18,13 @@ class App
     @musics << music
     puts "Music album added successfully!"
   end
+
+  def list_music_albums
+    puts "The list is umpty!" if @musics.empty?
+    @musics.each_with_index do |music, index|
+      author = !music.author.nil? ? music.author.first_name : "Unknown"
+      genre = !music.genre.nil? ? music.genre.name : "Unknown"
+      puts "#{index}) Author: #{author}, Genre: #{genre}, Published at: #{music.publish_date}"
+    end
+  end
 end
