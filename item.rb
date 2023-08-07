@@ -13,4 +13,8 @@ class Item
   def add_source(source)
     @source = source
   end
+
+  def can_be_archived?
+    (Time.now.year - @published_date.year) > 10
+  end
 end
