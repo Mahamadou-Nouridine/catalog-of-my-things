@@ -27,4 +27,11 @@ class App
       puts "#{index}) Author: #{author}, Genre: #{genre}, Published at: #{music.publish_date}"
     end
   end
+
+  def list_genres
+    puts "The list is umpty!" if @genres.empty?
+    @genres.each_with_index do |genre, index|
+      puts "#{index}) #{genre.name}"
+    end
+  end
 end

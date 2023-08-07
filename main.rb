@@ -3,6 +3,7 @@ require_relative 'app'
 Options = {
   '1' => 'add_music_album',
   '2' => 'List all Music albums',
+  '3' => 'List all genres',
   '10' => 'Quit'
 }
 
@@ -18,6 +19,8 @@ def main
       app.add_music_album
     when '2'
       app.list_music_albums
+    when '3'
+      app.list_genres
     when '10'
       puts 'Bye bye, see you again!'
       exit
