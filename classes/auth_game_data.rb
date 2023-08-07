@@ -8,8 +8,15 @@ class AuthorGame
     puts 'Error !'
   end
 
-  def save_game
-    ''
+  def save_game(file, data)
+    data_from_file = get_data(file)
+    file = File.open(file, 'w')
+    data_from_file = [] unless data_from_file.is_a?(Array)
+
+    data_from_file.push(data)
+    file.write JSON.generate(data_from_file)
+  rescue StandardError
+    puts 'Error!'
   end
 
   def save_author
@@ -18,4 +25,4 @@ class AuthorGame
 end
 
 dec = AuthorGame.new
-puts dec.get_data('author.json')
+puts dec.save_game('author.json', 'Bonjour')
