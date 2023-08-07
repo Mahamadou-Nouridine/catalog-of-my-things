@@ -1,5 +1,3 @@
-require 'date'
-
 class Item
   attr_accessor :publish_date, :archived, :label, :author, :genre, :source
   attr_reader :id
@@ -10,8 +8,12 @@ class Item
     @archived = archived
   end
 
-  def add_source(source)
-    @source = source
+  def add_genre(genre)
+    @genre = genre
+  end
+
+  def add_author(author)
+    @author = author
   end
 
   def can_be_archived?
