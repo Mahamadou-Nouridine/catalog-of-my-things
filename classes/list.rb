@@ -13,11 +13,13 @@ class List
   end
 
   def display_list(displayed_data)
+    return puts "\n There are no authors currently in the database or in your current array.\n" if displayed_data.empty?
+
     displayed_data.each do |value|
-      puts value
+      puts "\n[Author] First name : #{value['first_name']} Last name: #{value['last_name']}\n"
     end
   end
 end
 
 ls = List.new
-ls.display_authors(not_saved_value: [{ 'name' => 'Safari', 'second' => 'la o' }])
+ls.display_authors
