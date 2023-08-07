@@ -5,24 +5,23 @@ class AuthorGame
     file_data = File.read(file)
     JSON.parse(file_data)
   rescue StandardError
-    puts 'Error !'
+    puts 'The file you are looking for is not present in the current directory'
+    []
   end
 
-  def save_game(file, data)
+  def save(file, data)
     data_from_file = get_data(file)
     file = File.open(file, 'w')
     data_from_file = [] unless data_from_file.is_a?(Array)
 
     data_from_file.push(data)
-    file.write JSON.generate(data_from_file)
+    file.write JSON.dump(data_from_file)
+    file.close
   rescue StandardError
     puts 'Error!'
-  end
-
-  def save_author
-    ''
   end
 end
 
 dec = AuthorGame.new
-puts dec.save_game('author.json', 'Bonjour')
+dec.save('game.json', 'GTA')
+dec.save('author.json', { 'name' => 'Safari', 'second' => 'Hamuli', 'item' => [1, 1, 2, 3, 4, 5] })
