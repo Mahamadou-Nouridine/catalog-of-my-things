@@ -2,7 +2,7 @@ require_relative '../../classes/genre'
 require_relative '../../classes/item'
 
 describe Genre do
-    it 'should create a new genre' do
+    it 'Create Hip-hop genre' do
       genre = Genre.new('Hip-hop')
 
       expect(genre.name).to eq('Hip-hop')
