@@ -1,24 +1,28 @@
 require_relative 'app'
 
 OPTIONS = {
-  '1' => 'add_music_album',
+  '1' => 'List all books',
   '2' => 'List all Music albums',
   '3' => 'List all genres',
   '4' => 'List All Authors',
   '5' => 'List All Games',
+  '6' => 'Add a book',
+  '7' => 'Add a music album',
   '10' => 'Quit'
 }.freeze
 
 def main
   app = App.new
-  puts "Welcom to Catalog of my things applpication\n\n"
+  puts '=================================================='
+  puts "\nWelcome to Catalog of my things applpication\n\n"
+  puts '=================================================='
   loop do
     puts 'Select an option to continue'
     OPTIONS.each { |index, string| puts "#{index} - #{string}" }
     user_option = gets.chomp.to_s
     case user_option
     when '1'
-      app.add_music_album
+      # Implement
     when '2'
       app.list_music_albums
     when '3'
@@ -27,6 +31,10 @@ def main
       app.list_authors
     when '5'
       app.list_games
+    when '6'
+      app.add_book
+    when '7'
+      app.add_music_album
     when '10'
       puts 'Bye bye, see you again!'
       exit
