@@ -1,6 +1,7 @@
 require_relative 'classes/music_album'
 require_relative 'classes/genre'
 require_relative 'classes/preserve_data'
+require 'json'
 
 class App
   def initialize
@@ -8,6 +9,8 @@ class App
     @genres = []
     @preserve_data = PreserveData.new
     @preserve_data.create_files
+    music_album = MusicAlbum.new("22/12/2023", on_spotify: false, archived: false)
+    File.open('data/music_albums.json', 'w+') {|f| f.write(JSON.generate(music_album.object_to_hash))}
   end
 
   def add_music_album
