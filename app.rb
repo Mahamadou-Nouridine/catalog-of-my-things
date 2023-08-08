@@ -8,14 +8,12 @@ class App
   def initialize
     @preserve_data = PreserveData.new
     @preserve_data.create_files
-    # music_album = MusicAlbum.new("22/12/2023", on_spotify: false, archived: false)
-    # File.open('data/music_albums.json', 'w+') {|f| f.write(JSON.generate(music_album.object_to_hash))}
   end
 
   def add_music_album
-    puts 'Publication date'
+    print 'Publication date:'
     publish_date = gets.chomp
-    print 'Is the Music album on spotify? [y/n]'
+    print 'Is the Music album on spotify? [y/n]:'
     on_spotify = gets.chomp.to_s.downcase
     puts 'Out of range' unless %w[y n].include?(on_spotify)
     on_spotif = on_spotify == 'y'
