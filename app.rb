@@ -1,10 +1,13 @@
 require_relative 'classes/music_album'
 require_relative 'classes/genre'
+require_relative 'classes/preserve_data'
 
 class App
   def initialize
     @musics = []
     @genres = []
+    @preserve_data = PreserveData.new
+    @preserve_data.create_files
   end
 
   def add_music_album
@@ -32,6 +35,20 @@ class App
     puts 'The list is umpty!' if @genres.empty?
     @genres.each_with_index do |genre, index|
       puts "#{index}) #{genre.name}"
+    end
+  end
+
+  def list_authors
+    authors = @preserve_data.get_data('data/authors.json')
+    puts 'The list is umpty!' if authors.empty?
+    authors.each { |author| puts "[Author] First name : #{author['first_name']} | Last name: #{author['last_name']}\n" }
+  end
+
+  def list_games
+    games = @preserve_data.get_data('data/games.json')
+    puts 'The list is umpty!' if games.empty?
+    games.each do |game|
+      puts "[Game] Multiplayer : #{game['multiplayer']} | Last played_at: #{game['last_played_at']}\n"
     end
   end
 end
