@@ -2,10 +2,12 @@ require './item'
 require 'date'
 
 class Game < Item
-  def initialize(multiplayer, last_played)
+  attr_accessor :multiplayer, :last_played_at
+
+  def initialize(publish_date, multiplayer, last_played)
     @multiplayer = multiplayer
     @last_played_at = last_played
-    super(last_played)
+    super(publish_date)
   end
 
   def can_be_archived?
@@ -15,6 +17,3 @@ class Game < Item
     false
   end
 end
-
-df = Game.new(true, '2023-2-2')
-puts df.can_be_archived?

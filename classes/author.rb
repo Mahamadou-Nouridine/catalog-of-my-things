@@ -1,3 +1,5 @@
+require './auth_game_data'
+
 class Author
   attr_reader :id, :item
 
