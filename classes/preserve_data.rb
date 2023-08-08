@@ -22,7 +22,7 @@ class PreserveData
     file = File.open(file, 'w')
     data_from_file.push(data.object_to_hash)
     file.write JSON.dump(data_from_file)
-    return file.close
+    file.close
   rescue StandardError
     puts 'Error!'
   end

@@ -15,7 +15,7 @@ class Genre
   def object_to_hash
     {
       'name' => @name,
-      'items' => items = @items.map {|item| item.object_to_hash}
+      'items' => @items.map(&:object_to_hash)
     }
   end
 end

@@ -3,7 +3,6 @@ require './auth_game_data'
 class Author
   attr_reader :id, :item
 
-
   def initialize(first_name, last_name)
     @id = rand(1..1_000)
     @first_name = first_name
@@ -15,7 +14,7 @@ class Author
     {
       'first_name' => @first_name,
       'last_name' => @last_name,
-      'items' => items = @items.map {|item| item.object_to_hash}
+      'items' => @items.map(&:object_to_hash)
     }
   end
 

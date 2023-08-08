@@ -10,7 +10,7 @@ class MusicAlbum < Item
     {
       'publish_date' => @publish_date,
       'on_spotify' => @on_spotify,
-      'archived' => @archived,
+      'archived' => @archived
     }
   end
 
