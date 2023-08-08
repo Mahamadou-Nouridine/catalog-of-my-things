@@ -5,7 +5,7 @@ class AuthorGame
     file_data = File.read(file)
     JSON.parse(file_data)
   rescue StandardError
-    puts 'The file you are looking for is not present in the current directory'
+    puts "\nThe file you are looking for is either not present in the current directory or it is empty.\n\n"
     []
   end
 
