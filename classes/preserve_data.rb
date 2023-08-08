@@ -1,6 +1,14 @@
 require 'json'
 
-class AuthorGame
+FILES = ['authors.json', 'genres.json', 'games.json', 'music_albums.json'].freeze
+
+class PreserveData
+  def create_files
+    FILES.each do |path|
+      File.write("./data/#{path}", JSON.generate([])) unless File.exist?("./data/#{path}")
+    end
+  end
+
   def get_data(file)
     file_data = File.read(file)
     JSON.parse(file_data)
