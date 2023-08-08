@@ -81,6 +81,7 @@ To run the project, execute the following command:
 To run tests, run the following commands:
 
 ```sh
+  rspec spec Rspec/specs/
   rubocop
 ```
 
