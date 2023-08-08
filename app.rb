@@ -2,6 +2,7 @@ require_relative 'classes/music_album'
 require_relative 'classes/genre'
 require_relative 'classes/preserve_data'
 require_relative 'classes/game'
+require_relative 'classes/book'
 require 'json'
 
 class App
@@ -23,20 +24,28 @@ class App
   end
 
   def add_book
-    puts 'Publication date (format: yyyy-mm-dd) :'
+    puts 'A) Publication date (format: yyyy-mm-dd) :'
     publish_date = gets.chomp
-    puts 'Name of publisher :'
-    publish_by_who = gets.chomp
-    puts 'State of book cover :'
+    puts 'B) Name of publisher :'
+    publisher = gets.chomp
+    puts 'C) State of book cover (Bad or Good) :'
     cover_state = gets.chomp
-    book = Book.new(publish_date, publish_by_who, cover_state)
-    @books << book
+    book = Book.new(publish_date, publisher, cover_state)
+    @preserve_data.save('data/books.json', book)
     puts 'New book successfully added!'
+  end
+
+  def list_books
+    books = @preserve_data.get_data('data/books.json')
+    puts 'The list is empty!' if books.empty?
+    books.each do |book|
+      puts "\n[Book] Publisher : #{book['publisher']} | Published at: #{book['publish_date']} | Cover Condition/State: #{book['cover_state']}\n\n"
+    end
   end
 
   def list_music_albums
     music_albums = @preserve_data.get_data('data/music_albums.json')
-    puts 'The list is umpty!' if @music_albums.empty?
+    puts 'The list is empty!' if @music_albums.empty?
     music_albums.each_with_index do |music, index|
       author = music.author.nil? ? 'Unknown' : music.author.first_name
       genre = music.genre.nil? ? 'Unknown' : music.genre.name
@@ -46,7 +55,7 @@ class App
 
   def list_genres
     genres = @preserve_data.get_data('data/genres.json')
-    puts 'The list is umpty!' if genres.empty?
+    puts 'The list is empty!' if genres.empty?
     genres.each_with_index do |genre, index|
       puts "#{index}) #{genre.name}"
     end
