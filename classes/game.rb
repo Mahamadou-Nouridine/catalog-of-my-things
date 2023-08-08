@@ -1,4 +1,4 @@
-require './item'
+require_relative 'item'
 require 'date'
 
 class Game < Item
@@ -8,6 +8,14 @@ class Game < Item
     @multiplayer = multiplayer
     @last_played_at = last_played
     super(publish_date)
+  end
+
+  def object_to_hash
+    {
+      'publish_date' => @publish_date,
+      'multiplayer' => @multiplayer,
+      'last_played' => @last_played_at
+    }
   end
 
   def can_be_archived?

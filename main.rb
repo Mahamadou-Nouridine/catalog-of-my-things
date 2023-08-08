@@ -6,6 +6,7 @@ OPTIONS = {
   '3' => 'List all genres',
   '4' => 'List All Authors',
   '5' => 'List All Games',
+  '6' => 'Add a Game',
   '10' => 'Quit'
 }.freeze
 
@@ -27,6 +28,8 @@ def main
       app.list_authors
     when '5'
       app.list_games
+    when '6'
+      app.add_game
     when '10'
       puts 'Bye bye, see you again!'
       exit
