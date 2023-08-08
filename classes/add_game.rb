@@ -2,6 +2,9 @@ require './game'
 
 class AddGame
   def initialize
+    print 'Publish date: '
+    @publish = gets.chomp
+
     print 'Multiplayer: '
     @multiplayer = gets.chomp
 
@@ -10,7 +13,7 @@ class AddGame
   end
 
   def add_game(externa_data)
-    data = Game.new(@multiplayer, @last_played_at)
+    data = Game.new(@publish, @multiplayer, @last_played_at)
     return unless externa_data.is_a?(Array)
 
     externa_data.push(data)
