@@ -20,15 +20,7 @@ class PreserveData
   def save(file, data)
     data_from_file = get_data(file)
     file = File.open(file, 'w')
-    data_from_file = [] unless data_from_file.is_a?(Array)
-
-    unless data.is_a?(Array)
-      data_from_file.push(data)
-      file.write JSON.dump(data_from_file)
-      return file.close
-    end
-
-    data_from_file.concat(data)
+    data_from_file.push(data.object_to_hash)
     file.write JSON.dump(data_from_file)
     file.close
   rescue StandardError
