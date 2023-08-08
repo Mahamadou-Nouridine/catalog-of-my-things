@@ -10,7 +10,6 @@ class AddGame
   end
 
   def add_game(externa_data)
-    @game_table = []
     data = Game.new(@multiplayer, @last_played_at)
     return unless externa_data.is_a?(Array)
 
