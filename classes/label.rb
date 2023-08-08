@@ -12,4 +12,12 @@ class Label
     @items << item unless @items.include(item)
     item.label = self
   end
+
+  def object_to_hash
+    {
+      'title' => @title,
+      'color' => @color,
+      'items' => items = @items.map {|item| item.object_to_hash}
+    }
+  end
 end
