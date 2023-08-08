@@ -1,4 +1,4 @@
-class Label < Item
+class Label
   attr_accessor :items, :name, :id
 
   def initialize(title, color)
@@ -10,7 +10,7 @@ class Label < Item
   end
 
   def add_item(item)
-    @items << item
+    @items << item unless @items.include(item)
     item.label = self
   end
 end
