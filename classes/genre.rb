@@ -11,4 +11,11 @@ class Genre
     @items << item unless @items.include?(item)
     item.add_genre(self)
   end
+
+  def object_to_hash
+    {
+      'name' => @name,
+      'items' => @items.map(&:object_to_hash)
+    }
+  end
 end

@@ -8,6 +8,7 @@ OPTIONS = {
   '5' => 'List All Games',
   '6' => 'Add a book',
   '7' => 'Add a music album',
+  '6' => 'Add a Game',
   '10' => 'Quit'
 }.freeze
 
@@ -35,6 +36,7 @@ def main
       app.add_book
     when '7'
       app.add_music_album
+      app.add_game
     when '10'
       puts 'Bye bye, see you again!'
       exit
