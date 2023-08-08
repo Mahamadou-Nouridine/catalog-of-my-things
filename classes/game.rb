@@ -15,6 +15,3 @@ class Game < Item
     false
   end
 end
-
-df = Game.new(true, '2023-2-2')
-puts df.can_be_archived?
