@@ -1,6 +1,7 @@
 require_relative 'classes/music_album'
 require_relative 'classes/genre'
 require_relative 'classes/preserve_data'
+require_relative 'classes/get_item_metadata'
 require_relative 'classes/add_author'
 require_relative 'classes/game'
 require_relative 'classes/book'
@@ -8,6 +9,7 @@ require_relative 'classes/label'
 require 'json'
 
 class App
+  include GetMetadata
   def initialize
     @preserve_data = PreserveData.new
     @preserve_data.create_files
@@ -21,7 +23,18 @@ class App
     puts 'Out of range' unless %w[y n].include?(on_spotify)
     on_spotif = on_spotify == 'y'
     music = MusicAlbum.new(publish_date, on_spotify: on_spotif)
-    @preserve_data.save('data/music_albums.json', music)
+    author = get_author(music)
+    label = get_label(music)
+    genre = get_genre(music)
+    music_hash = music.object_to_hash.merge({
+                                              'author' => author,
+                                              'label' => label,
+                                              'genre' => genre
+                                            })
+    @preserve_data.save('data/music_albums.json', music_hash)
+    @preserve_data.save('data/authors.json', author)
+    @preserve_data.save('data/label.json', label)
+    @preserve_data.save('data/genres.json', genre)
     puts 'Music album added successfully!'
   end
 
@@ -59,11 +72,11 @@ class App
 
   def list_music_albums
     music_albums = @preserve_data.get_data('data/music_albums.json')
-    puts 'The list is empty!' if @music_albums.empty?
+    puts 'The list is empty!' if music_albums.empty?
     music_albums.each_with_index do |music, index|
-      author = music.author.nil? ? 'Unknown' : music.author.first_name
-      genre = music.genre.nil? ? 'Unknown' : music.genre.name
-      puts "#{index}) [Music Album] Author: #{author}, Genre: #{genre}, Published at: #{music.publish_date}"
+      author = music['author'].nil? ? 'Unknown' : music['author']['first_name']
+      genre = music['genre'].nil? ? 'Unknown' : music['genre']['name']
+      puts "#{index}) [Music Album] Author: #{author}, Genre: #{genre}, Published at: #{music['publish_date']}"
     end
   end
 
@@ -71,7 +84,7 @@ class App
     genres = @preserve_data.get_data('data/genres.json')
     puts 'The list is empty!' if genres.empty?
     genres.each_with_index do |genre, index|
-      puts "#{index}) #{genre.name}"
+      puts "#{index}) #{genre['name']}"
     end
   end
 

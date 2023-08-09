@@ -8,8 +8,8 @@ class Genre
   end
 
   def add_item(item)
-    @items << item unless @items.include?(item)
-    item.add_genre(self)
+    @items << item
+    item.genre = self
   end
 
   def object_to_hash
