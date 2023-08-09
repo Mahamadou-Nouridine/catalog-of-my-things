@@ -1,6 +1,6 @@
 require 'json'
 
-FILES = ['authors.json', 'genres.json', 'games.json', 'music_albums.json'].freeze
+FILES = ['authors.json', 'genres.json', 'games.json', 'music_albums.json', 'books.json'].freeze
 
 class PreserveData
   def create_files

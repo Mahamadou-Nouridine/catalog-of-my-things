@@ -2,6 +2,7 @@ require_relative 'classes/music_album'
 require_relative 'classes/genre'
 require_relative 'classes/preserve_data'
 require_relative 'classes/game'
+require_relative 'classes/book'
 require 'json'
 
 class App
@@ -22,9 +23,32 @@ class App
     puts 'Music album added successfully!'
   end
 
+  def add_book
+    puts 'A) Publication date (format: yyyy-mm-dd) :'
+    publish_date = gets.chomp
+    puts 'B) Name of publisher :'
+    publisher = gets.chomp
+    puts 'C) State of book cover (Bad or Good) :'
+    cover_state = gets.chomp
+    book = Book.new(publish_date, publisher, cover_state)
+    @preserve_data.save('data/books.json', book)
+    puts 'New book successfully added!'
+  end
+
+  def list_books
+    books = @preserve_data.get_data('data/books.json')
+    puts 'The list is empty!' if books.empty?
+    books.each do |book|
+      pname = book['publisher']
+      pdate = book['publish_date']
+      state = book['cover_state']
+      puts "\n[Book] Publisher : #{pname} | Published at: #{pdate} | Cover Condition/State: #{state}\n\n"
+    end
+  end
+
   def list_music_albums
     music_albums = @preserve_data.get_data('data/music_albums.json')
-    puts 'The list is umpty!' if @music_albums.empty?
+    puts 'The list is empty!' if @music_albums.empty?
     music_albums.each_with_index do |music, index|
       author = music.author.nil? ? 'Unknown' : music.author.first_name
       genre = music.genre.nil? ? 'Unknown' : music.genre.name
@@ -34,7 +58,7 @@ class App
 
   def list_genres
     genres = @preserve_data.get_data('data/genres.json')
-    puts 'The list is umpty!' if genres.empty?
+    puts 'The list is empty!' if genres.empty?
     genres.each_with_index do |genre, index|
       puts "#{index}) #{genre.name}"
     end
@@ -42,13 +66,13 @@ class App
 
   def list_authors
     authors = @preserve_data.get_data('data/authors.json')
-    puts 'The list is umpty!' if authors.empty?
+    puts 'The list is empty!' if authors.empty?
     authors.each { |author| puts "[Author] First name : #{author['first_name']} | Last name: #{author['last_name']}\n" }
   end
 
   def list_games
     games = @preserve_data.get_data('data/games.json')
-    puts 'The list is umpty!' if games.empty?
+    puts 'The list is empty!' if games.empty?
     games.each do |game|
       puts "[Game] Multiplayer : #{game['multiplayer']} | Last played_at: #{game['last_played']}\n"
     end
