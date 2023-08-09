@@ -33,11 +33,16 @@ class App
     puts 'C) State of book cover (Bad or Good) :'
     cover_state = gets.chomp
     puts 'D) Add label title :'
-    title = gets.chomp
+    label_title = gets.chomp
     puts 'E) Add label color :'
-    color = gets.chomp
+    label_color = gets.chomp
     book = Book.new(publish_date, publisher, cover_state)
-    @preserve_data.save('data/books.json', book)
+    label = Label.new(label_title, label_color)
+    @preserve_data.save('data/books.json', 
+                    { 'id' => book.id,'publish_date' => book.publish_date, 'publisher' => book.publisher,
+                    'cover_state' => book.cover_state })
+    @preserve_data.save('data/labels.json',  { 
+                      'id' => label.id,'title' => label.title, 'color' => label.color })
     puts 'New book successfully added!'
   end
 
