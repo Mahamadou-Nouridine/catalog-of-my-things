@@ -20,7 +20,7 @@ class Game < Item
 
   def can_be_archived?
     last_date = Date.parse(@last_played_at)
-    return true if (Time.now.year - last_date.year) > 2 and Item.new(last_date).can_be_archived?
+    return true if (Time.now.year - last_date.year) > 2 and Item.new(Date.parse(publish_date)).can_be_archived?
 
     false
   end
