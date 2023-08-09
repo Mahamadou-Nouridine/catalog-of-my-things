@@ -13,10 +13,7 @@ class MusicAlbum < Item
       'id' => @id,
       'publish_date' => @publish_date,
       'on_spotify' => @on_spotify,
-      'archived' => @archived,
-      # 'author' => @author.object_to_hash,
-      # 'label' => @label.object_to_hash,
-      # 'genre' => @genre.object_to_hash,
+      'archived' => @archived
     }
   end
 

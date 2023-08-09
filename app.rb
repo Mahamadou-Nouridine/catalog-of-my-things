@@ -26,10 +26,10 @@ class App
     label = get_label(music)
     genre = get_genre(music)
     music_hash = music.object_to_hash.merge({
-      'author' => author,
-      'label' => label,
-      'genre' => genre,
-    })
+                                              'author' => author,
+                                              'label' => label,
+                                              'genre' => genre
+                                            })
     @preserve_data.save('data/music_albums.json', music_hash)
     @preserve_data.save('data/authors.json', author)
     @preserve_data.save('data/label.json', label)
@@ -64,8 +64,8 @@ class App
     music_albums = @preserve_data.get_data('data/music_albums.json')
     puts 'The list is empty!' if music_albums.empty?
     music_albums.each_with_index do |music, index|
-      author = music["author"].nil? ? 'Unknown' : music["author"]["first_name"]
-      genre = music["genre"].nil? ? 'Unknown' : music["genre"]["name"]
+      author = music['author'].nil? ? 'Unknown' : music['author']['first_name']
+      genre = music['genre'].nil? ? 'Unknown' : music['genre']['name']
       puts "#{index}) [Music Album] Author: #{author}, Genre: #{genre}, Published at: #{music['publish_date']}"
     end
   end
