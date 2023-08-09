@@ -3,21 +3,34 @@ require_relative 'label'
 require_relative 'genre'
 
 module GetMetadata
-  def get_author
+  def get_author(music)
     puts "The Author?"
     print "First name: "
     first_name = gets.chomp.to_s
     print "last name: "
     last_name = gets.chomp.to_s
-    return Author.new(first_name, last_name)
+    author = Author.new(first_name, last_name)
+    music.add_author(author)
+    return author.object_to_hash
   end
 
-  def get_label
+  def get_label(music)
     puts "The Label?"
-    print "title: "
+    print "Title: "
     title = gets.chomp.to_s
-    print "color: "
+    print "Color: "
     color = gets.chomp.to_s
-    return Label.new(title, color)
+     label = Label.new(title, color)
+     return label.object_to_hash
+     music.add_label(label)
+    end
+
+    def get_genre(music)
+      puts "The genre?"
+      print "Name: "
+      name = gets.chomp.to_s
+      genre = Genre.new(name)
+      music.add_genre(genre)
+      return genre.object_to_hash
+    end
   end
-end

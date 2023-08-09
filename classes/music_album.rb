@@ -10,9 +10,13 @@ class MusicAlbum < Item
 
   def object_to_hash
     {
+      'id' => @id,
       'publish_date' => @publish_date,
       'on_spotify' => @on_spotify,
-      'archived' => @archived
+      'archived' => @archived,
+      # 'author' => @author.object_to_hash,
+      # 'label' => @label.object_to_hash,
+      # 'genre' => @genre.object_to_hash,
     }
   end
 
