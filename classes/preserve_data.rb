@@ -27,7 +27,7 @@ class PreserveData
     # If the data from the file is not an array, convert it to an array.
     data_from_file = [] unless data_from_file.is_a?(Array)
 
-    # If data is an array, add it to the data from the file.
+    # If data is not an array, add it to the data from the file.
     unless data.is_a?(Array)
       data_from_file.push(data)
       file.write JSON.dump(data_from_file)
