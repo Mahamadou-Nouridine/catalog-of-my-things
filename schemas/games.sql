@@ -5,5 +5,5 @@ CREATE TABLE game (
      FOREIGN KEY (id) REFERENCES genre(id),
      FOREIGN KEY (id) REFERENCES author(id),
      FOREIGN KEY (id) REFERENCES label(id),
-     FOREIGN KEY (id) REFERENCES label(id)
+     FOREIGN KEY (id) REFERENCES source(id)
 );
