@@ -1,9 +1,9 @@
 class Label
-  attr_accessor :items, :name, :id
+  attr_accessor :title, :color, :id
 
   def initialize(title, color)
     @id = Random.rand(1..1000)
-    @title = title
+    @title = title,
     @color = color
     @items = []
   end
@@ -15,6 +15,7 @@ class Label
 
   def object_to_hash
     {
+      'id' => @id,
       'title' => @title,
       'color' => @color,
       'items' => @items.map(&:object_to_hash)

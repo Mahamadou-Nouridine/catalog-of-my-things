@@ -15,7 +15,9 @@ OPTIONS = {
 
 def main
   app = App.new
+  puts "==================================================="
   puts "\nWelcome to Catalog of my things applpication\n\n"
+  puts "==================================================="
   loop do
     puts 'Select an option to continue'
     OPTIONS.each { |index, string| puts "#{index} - #{string}" }

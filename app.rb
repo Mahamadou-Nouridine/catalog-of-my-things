@@ -3,6 +3,7 @@ require_relative 'classes/genre'
 require_relative 'classes/preserve_data'
 require_relative 'classes/game'
 require_relative 'classes/book'
+require_relative 'classes/label'
 require 'json'
 
 class App
@@ -30,6 +31,10 @@ class App
     publisher = gets.chomp
     puts 'C) State of book cover (Bad or Good) :'
     cover_state = gets.chomp
+    puts 'D) Add label title :'
+    title = gets.chomp
+    puts 'E) Add label color :'
+    color = gets.chomp
     book = Book.new(publish_date, publisher, cover_state)
     @preserve_data.save('data/books.json', book)
     puts 'New book successfully added!'
