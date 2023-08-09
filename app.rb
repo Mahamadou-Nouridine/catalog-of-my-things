@@ -66,7 +66,7 @@ class App
     print 'Last played at: '
     last_played_at = gets.chomp
     game = Game.new(publish, multiplayer, last_played_at)
-    @preserve_data.save('data/games.json', game)
+    @preserve_data.save('data/games.json', {"publish_date" => game.publish_date, "multiplayer" => game.multiplayer, "last_played" => game.last_played_at})
     puts "Game added successfully!\n"
   end
 end
