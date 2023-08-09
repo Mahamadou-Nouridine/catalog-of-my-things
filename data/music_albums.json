@@ -1,1 +1,32 @@
-[]
+[
+  {
+    "id": 532,
+    "publish_date": "432",
+    "on_spotify": true,
+    "archived": false,
+    "author": {
+      "first_name": "uzboizq",
+      "last_name": "knvuzsov",
+      "items": [
+        {
+          "id": 532,
+          "publish_date": "432",
+          "on_spotify": true,
+          "archived": false
+        }
+      ]
+    },
+    "label": { "title": "nisjbvs", "color": "qbvizs", "items": [] },
+    "genre": {
+      "name": "ksjivk",
+      "items": [
+        {
+          "id": 532,
+          "publish_date": "432",
+          "on_spotify": true,
+          "archived": false
+        }
+      ]
+    }
+  }
+]
