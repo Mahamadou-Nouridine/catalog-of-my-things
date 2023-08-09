@@ -11,4 +11,13 @@ module GetMetadata
     last_name = gets.chomp.to_s
     return Author.new(first_name, last_name)
   end
+
+  def get_label
+    puts "The Label?"
+    print "title: "
+    title = gets.chomp.to_s
+    print "color: "
+    color = gets.chomp.to_s
+    return Label.new(title, color)
+  end
 end
