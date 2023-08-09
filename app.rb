@@ -39,7 +39,10 @@ class App
     books = @preserve_data.get_data('data/books.json')
     puts 'The list is empty!' if books.empty?
     books.each do |book|
-      puts "\n[Book] Publisher : #{book['publisher']} | Published at: #{book['publish_date']} | Cover Condition/State: #{book['cover_state']}\n\n"
+      pname = book['publisher']
+      pdate = book['publish_date']
+      state = book['cover_state']
+      puts "\n[Book] Publisher : #{pname} | Published at: #{pdate} | Cover Condition/State: #{state}\n\n"
     end
   end
 
