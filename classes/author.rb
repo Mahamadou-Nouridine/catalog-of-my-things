@@ -10,6 +10,7 @@ class Author
 
   def object_to_hash
     {
+      'id' => @id,
       'first_name' => @first_name,
       'last_name' => @last_name,
       'items' => @items.map(&:object_to_hash)

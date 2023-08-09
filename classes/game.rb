@@ -12,6 +12,7 @@ class Game < Item
 
   def object_to_hash
     {
+      'id' => @id,
       'publish_date' => @publish_date,
       'multiplayer' => @multiplayer,
       'last_played' => @last_played_at

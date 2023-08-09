@@ -22,18 +22,10 @@ class App
     puts 'Out of range' unless %w[y n].include?(on_spotify)
     on_spotif = on_spotify == 'y'
     music = MusicAlbum.new(publish_date, on_spotify: on_spotif)
-    author = get_author(music)
-    label = get_label(music)
-    genre = get_genre(music)
-    music_hash = music.object_to_hash.merge({
-                                              'author' => author,
-                                              'label' => label,
-                                              'genre' => genre
-                                            })
-    @preserve_data.save('data/music_albums.json', music_hash)
-    @preserve_data.save('data/authors.json', author)
-    @preserve_data.save('data/label.json', label)
-    @preserve_data.save('data/genres.json', genre)
+    get_author('data/authors.json', music)
+    get_label('data/label.json', music)
+    get_genre('data/genres.json', music)
+    @preserve_data.save('data/music_albums.json', music.object_to_hash)
     puts 'Music album added successfully!'
   end
 
@@ -104,10 +96,10 @@ class App
     print 'Last played at: '
     last_played_at = gets.chomp
     game = Game.new(publish, multiplayer, last_played_at)
-    @preserve_data.save('data/games.json',
-                        { 'id' => game.id, 'publish_date' => game.publish_date, 'multiplayer' => game.multiplayer,
-                          'last_played' => game.last_played_at })
     AddAuthor.new('data/authors.json', game)
+    get_genre('data/genres.json', game)
+    get_label('data/label.json', game)
+    @preserve_data.save('data/games.json', game.object_to_hash)
     puts "Game added successfully!\n"
   end
 end
