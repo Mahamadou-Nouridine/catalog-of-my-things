@@ -18,9 +18,24 @@ class PreserveData
   end
 
   def save(file, data)
+    # This function saves the data to the file.
+
+    # Get the data from the file.
     data_from_file = get_data(file)
     file = File.open(file, 'w')
-    data_from_file.push(data.object_to_hash)
+
+    # If the data from the file is not an array, convert it to an array.
+    data_from_file = [] unless data_from_file.is_a?(Array)
+
+    # If data is not an array, add it to the data from the file.
+    unless data.is_a?(Array)
+      data_from_file.push(data)
+      file.write JSON.dump(data_from_file)
+      return file.close
+    end
+
+    # Otherwise, concatenate data to the data from the file.
+    data_from_file.concat(data)
     file.write JSON.dump(data_from_file)
     file.close
   rescue StandardError

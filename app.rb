@@ -1,6 +1,7 @@
 require_relative 'classes/music_album'
 require_relative 'classes/genre'
 require_relative 'classes/preserve_data'
+require_relative 'classes/add_author'
 require_relative 'classes/game'
 require_relative 'classes/book'
 require_relative 'classes/label'
@@ -95,7 +96,10 @@ class App
     print 'Last played at: '
     last_played_at = gets.chomp
     game = Game.new(publish, multiplayer, last_played_at)
-    @preserve_data.save('data/games.json', game)
+    @preserve_data.save('data/games.json',
+                        { 'id' => game.id, 'publish_date' => game.publish_date, 'multiplayer' => game.multiplayer,
+                          'last_played' => game.last_played_at })
+    AddAuthor.new('data/authors.json', game)
     puts "Game added successfully!\n"
   end
 end

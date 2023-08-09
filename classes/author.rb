@@ -1,7 +1,5 @@
-require './auth_game_data'
-
 class Author
-  attr_reader :id, :item
+  attr_reader :id, :items, :first_name, :last_name
 
   def initialize(first_name, last_name)
     @id = rand(1..1_000)
