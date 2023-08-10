@@ -65,42 +65,47 @@ class App
       label = book['label']['title']
       genre = book['genre']['name']
       print "\n[Book] Author:#{author} | Label: #{label} | Genre: #{genre} | "
-      print "Publisher : #{pname} | Published at: #{pdate} | Cover: #{state}\n\n"
+      print "Publisher : #{pname} | Published at: #{pdate} | Cover: #{state}"
     end
+    puts "\n\n"
   end
 
   def list_labels
     labels = @preserve_data.get_data('data/label.json')
     puts 'The list is empty!' if labels.empty?
     labels.each_with_index do |label, index|
-      puts "\n#{index + 1}) [Label] Title: #{label['title']} | Label Color: #{label['color']}\n\n"
+      puts "#{index + 1}) [Label] Title: #{label['title']} | Label Color: #{label['color']}"
     end
+    puts "\n\n"
   end
 
   def list_music_albums
     music_albums = @preserve_data.get_data('data/music_albums.json')
     puts 'The list is empty!' if music_albums.empty?
-    music_albums.each_with_index do |music, _index|
+    music_albums.each do |music|
       author = music['author'].nil? ? 'Unknown' : music['author']['first_name']
       genre = music['genre'].nil? ? 'Unknown' : music['genre']['name']
       label = music['label'].nil? ? 'Unknown' : music['label']['title']
       print "\n[Music Album] Author: #{author} | Genre: #{genre} | label: #{label} | "
-      print "Published at: #{music['publish_date']} | On spotify: #{music['on_spotify']}\n\n"
+      print "Published at: #{music['publish_date']} | On spotify: #{music['on_spotify']}"
     end
+    puts "\n\n"
   end
 
   def list_genres
     genres = @preserve_data.get_data('data/genres.json')
     puts 'The list is empty!' if genres.empty?
-    genres.each_with_index do |genre, index|
-      puts "#{index}) #{genre['name']}"
+    genres.each do |genre|
+      puts "[Genre] #{genre['name']}"
     end
+    puts "\n\n"
   end
 
   def list_authors
     authors = @preserve_data.get_data('data/authors.json')
     puts 'The list is empty!' if authors.empty?
-    authors.each { |author| puts "[Author] First name : #{author['first_name']} | Last name: #{author['last_name']}\n" }
+    authors.each { |author| puts "[Author] First name : #{author['first_name']} | Last name: #{author['last_name']}" }
+    puts "\n\n"
   end
 
   def list_games
@@ -111,8 +116,9 @@ class App
       label = game['label']['title']
       genre = game['genre']['name']
       print "\n[Game] Author: #{author} | Label: #{label} | Genre: #{genre} | "
-      print "Multiplayer : #{game['multiplayer']} | Last played_at: #{game['last_played']}\n\n"
+      print "Multiplayer : #{game['multiplayer']} | Last played_at: #{game['last_played']}"
     end
+    puts "\n\n"
   end
 
   def add_game
