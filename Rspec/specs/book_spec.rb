@@ -37,11 +37,12 @@ describe Book do
   end
 
   describe '#can_be_archived?' do
-  context 'when cover state is bad' do
-    let(:cover_state) { 'bad' }
+    context 'when cover state is bad' do
+      let(:cover_state) { 'bad' }
 
-    it 'returns true' do
-      expect(book.can_be_archived?).to be true
+      it 'returns true' do
+        expect(book.can_be_archived?).to be true
+      end
     end
   end
 
