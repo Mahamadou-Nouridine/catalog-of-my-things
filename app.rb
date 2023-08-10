@@ -5,6 +5,7 @@ require_relative 'classes/get_item_metadata'
 require_relative 'classes/add_author'
 require_relative 'classes/game'
 require_relative 'classes/book'
+require_relative 'classes/label'
 require 'json'
 
 class App
@@ -37,7 +38,11 @@ class App
     puts 'C) State of book cover (Bad or Good) :'
     cover_state = gets.chomp
     book = Book.new(publish_date, publisher, cover_state)
-    @preserve_data.save('data/books.json', book)
+    label = get_label(book)
+    @preserve_data.save('data/books.json',
+                        { 'id' => book.id, 'publish_date' => book.publish_date, 'publisher' => book.publisher,
+                          'cover_state' => book.cover_state })
+    @preserve_data.save('data/label.json', label)
     puts 'New book successfully added!'
   end
 
@@ -49,6 +54,14 @@ class App
       pdate = book['publish_date']
       state = book['cover_state']
       puts "\n[Book] Publisher : #{pname} | Published at: #{pdate} | Cover Condition/State: #{state}\n\n"
+    end
+  end
+
+  def list_labels
+    labels = @preserve_data.get_data('data/label.json')
+    puts 'The list is empty!' if labels.empty?
+    labels.each_with_index do |label, index|
+      puts "\n#{index + 1}) [Label] Title: #{label['title']} | Label Color: #{label['color']}\n\n"
     end
   end
 
