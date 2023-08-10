@@ -8,21 +8,6 @@ class Item
     @archived = archived
   end
 
-  # def add_genre(genre)
-  #   @genre = genre
-  #   # genre.add_item(self)
-  # end
-
-  # def add_author(author)
-  #   @author = author
-  #   # author.add_item(self)
-  # end
-
-  # def add_label(label)
-  #   @label = label
-  #   # label.add_item(self)
-  # end
-
   def add_genre(genre)
     @genre = genre
     genre.items << self unless genre.items.include?(self)
