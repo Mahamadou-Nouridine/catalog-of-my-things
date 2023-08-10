@@ -23,10 +23,15 @@ class App
     puts 'Out of range' unless %w[y n].include?(on_spotify)
     on_spotif = on_spotify == 'y'
     music = MusicAlbum.new(publish_date, on_spotify: on_spotif)
-    get_author('data/authors.json', music)
-    get_label('data/label.json', music)
-    get_genre('data/genres.json', music)
-    @preserve_data.save('data/music_albums.json', music.object_to_hash)
+    author = get_author('data/authors.json', music)
+    label = get_label('data/label.json', music)
+    genre = get_genre('data/genres.json', music)
+    music_album_hash = music.object_to_hash.merge({
+      'author' => author,
+      'label' => label,
+      'genre' => genre,
+    })
+    @preserve_data.save('data/music_albums.json', music_album_hash)
     puts 'Music album added successfully!'
   end
 
@@ -38,11 +43,15 @@ class App
     puts 'C) State of book cover (Bad or Good) :'
     cover_state = gets.chomp
     book = Book.new(publish_date, publisher, cover_state)
-    label = get_label(book)
-    @preserve_data.save('data/books.json',
-                        { 'id' => book.id, 'publish_date' => book.publish_date, 'publisher' => book.publisher,
-                          'cover_state' => book.cover_state })
-    @preserve_data.save('data/label.json', label)
+    author = get_author('data/authors.json', book)
+    label = get_label('data/label.json', book)
+    genre = get_genre('data/genres.json', book)
+    book_hash = book.object_to_hash.merge({
+      'author' => author,
+      'label' => label,
+      'genre' => genre,
+    })
+    @preserve_data.save('data/books.json', book_hash)
     puts 'New book successfully added!'
   end
 
@@ -53,7 +62,10 @@ class App
       pname = book['publisher']
       pdate = book['publish_date']
       state = book['cover_state']
-      puts "\n[Book] Publisher : #{pname} | Published at: #{pdate} | Cover Condition/State: #{state}\n\n"
+      author = book['author']['first_name']
+      label = book['label']['title']
+      genre = book['genre']['name']
+      puts "\n[Book] Author:#{author} | Label: #{label} | Genre: #{genre} | Publisher : #{pname} | Published at: #{pdate} | Cover: #{state}\n\n"
     end
   end
 
@@ -71,7 +83,8 @@ class App
     music_albums.each_with_index do |music, index|
       author = music['author'].nil? ? 'Unknown' : music['author']['first_name']
       genre = music['genre'].nil? ? 'Unknown' : music['genre']['name']
-      puts "#{index}) [Music Album] Author: #{author}, Genre: #{genre}, Published at: #{music['publish_date']}"
+      label = music['label'].nil? ? 'Unknown' : music['label']['title']
+      puts "\n[Music Album] Author: #{author} | Genre: #{genre} | label: #{label} | Published at: #{music['publish_date']} | On spotify: #{music['on_spotify']}"
     end
   end
 
@@ -93,7 +106,10 @@ class App
     games = @preserve_data.get_data('data/games.json')
     puts 'The list is empty!' if games.empty?
     games.each do |game|
-      puts "[Game] Multiplayer : #{game['multiplayer']} | Last played_at: #{game['last_played']}\n"
+      author = game['author']['first_name']
+      label = game['label']['title']
+      genre = game['genre']['name']
+      puts "\n[Game] Author: #{author} | Label: #{label} | Genre: #{genre}  Multiplayer : #{game['multiplayer']} | Last played_at: #{game['last_played']}\n"
     end
   end
 
@@ -109,10 +125,15 @@ class App
     print 'Last played at: '
     last_played_at = gets.chomp
     game = Game.new(publish, multiplayer, last_played_at)
-    AddAuthor.new('data/authors.json', game)
-    get_genre('data/genres.json', game)
-    get_label('data/label.json', game)
-    @preserve_data.save('data/games.json', game.object_to_hash)
+    author = get_author('data/authors.json', game)
+    label = get_label('data/label.json', game)
+    genre = get_genre('data/genres.json', game)
+    game_album_hash = game.object_to_hash.merge({
+      'author' => author,
+      'label' => label,
+      'genre' => genre,
+    })
+    @preserve_data.save('data/games.json', game_album_hash)
     puts "Game added successfully!\n"
   end
 end

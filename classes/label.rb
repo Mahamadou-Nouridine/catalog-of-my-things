@@ -21,4 +21,11 @@ class Label
       'items' => @items.map(&:object_to_hash)
     }
   end
+
+  def necessary_info
+    {
+      'title' => @title,
+      'color' => @color,
+    }
+  end
 end
