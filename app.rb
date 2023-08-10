@@ -45,17 +45,12 @@ class App
     publisher = gets.chomp
     puts 'C) State of book cover (Bad or Good) :'
     cover_state = gets.chomp
-    puts 'D) Add label title :'
-    label_title = gets.chomp
-    puts 'E) Add label color :'
-    label_color = gets.chomp
     book = Book.new(publish_date, publisher, cover_state)
-    label = Label.new(label_title, label_color)
-    @preserve_data.save('data/books.json', 
-                    { 'id' => book.id,'publish_date' => book.publish_date, 'publisher' => book.publisher,
-                    'cover_state' => book.cover_state })
-    @preserve_data.save('data/labels.json',  { 
-                      'id' => label.id,'title' => label.title, 'color' => label.color })
+    label = get_label(book)
+    @preserve_data.save('data/books.json',
+                        { 'id' => book.id, 'publish_date' => book.publish_date, 'publisher' => book.publisher,
+                          'cover_state' => book.cover_state })
+    @preserve_data.save('data/label.json', label)
     puts 'New book successfully added!'
   end
 
@@ -67,6 +62,14 @@ class App
       pdate = book['publish_date']
       state = book['cover_state']
       puts "\n[Book] Publisher : #{pname} | Published at: #{pdate} | Cover Condition/State: #{state}\n\n"
+    end
+  end
+
+  def list_labels
+    labels = @preserve_data.get_data('data/label.json')
+    puts 'The list is empty!' if labels.empty?
+    labels.each_with_index do |label, index|
+      puts "\n#{index + 1}) [Label] Title: #{label['title']} | Label Color: #{label['color']}\n\n"
     end
   end
 
