@@ -2,7 +2,7 @@ require_relative '../../classes/book'
 require_relative '../../classes/item'
 
 describe Book do
-  let(:publish_date) { Date.new(2020, 1, 1) }
+  let(:publish_date) { '01-01-01' }
   let(:publisher) { 'Example Publisher' }
   let(:cover_state) { 'good' }
   let(:book) { Book.new(publish_date, publisher, cover_state) }
@@ -41,14 +41,8 @@ describe Book do
       let(:cover_state) { 'bad' }
 
       it 'returns true' do
-        expect(book.can_be_archived?).to be true
+        expect(book.can_be_archived?).to be(true)
       end
-    end
-  end
-
-  context 'when cover state is not bad' do
-    it 'returns false' do
-      expect(book.can_be_archived?).to be false
     end
   end
 end

@@ -1,5 +1,0 @@
-CREATE TABLE label(
-  ID SERIAL PRIMARY KEY,
-  title VARCHAR(50),
-  color VARCHAR(30),
-);
