@@ -33,4 +33,9 @@ describe Item do
   it 'Item archived method' do
     expect(item.can_be_archived?).to eq(false)
   end
+
+  it "This Item can't be archived" do
+    item.move_to_archive
+    expect(item.archived).to eq(false)
+  end
 end
