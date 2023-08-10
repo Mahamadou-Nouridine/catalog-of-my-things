@@ -16,6 +16,7 @@
     - [Setup](#setup)
     - [Usage](#usage)
     - [Run tests](#run-tests)
+    - [Presentation video](#presentation-video)
   - [👥 Authors ](#-authors-)
   - [🔭 Future Features ](#-future-features-)
   - [🤝 Contributing ](#-contributing-)
@@ -81,8 +82,15 @@ To run the project, execute the following command:
 To run tests, run the following commands:
 
 ```sh
+  rspec spec Rspec/specs/
   rubocop
 ```
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+### Presentation video
+
+presentation video : [Video](https://drive.google.com/file/d/1c04iCgdfI4XMM5OUFkIk7XSK_mSGgugd/view?usp=sharing)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
