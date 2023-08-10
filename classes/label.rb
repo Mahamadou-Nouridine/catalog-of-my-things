@@ -15,6 +15,7 @@ class Label
 
   def object_to_hash
     {
+      'id' => @id,
       'title' => @title,
       'color' => @color,
       'items' => @items.map(&:object_to_hash)

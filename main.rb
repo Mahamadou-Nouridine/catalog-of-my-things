@@ -15,7 +15,9 @@ OPTIONS = {
 
 def main
   app = App.new
+  puts '==================================================='
   puts "\nWelcome to Catalog of my things applpication\n\n"
+  puts '==================================================='
   loop do
     puts 'Select an option to continue'
     OPTIONS.each { |index, string| puts "#{index} - #{string}" }
@@ -25,6 +27,7 @@ def main
     when '2' then app.list_music_albums
     when '3' then app.list_games
     when '4' then app.list_genres
+    when '5' then app.list_labels
     when '6' then app.list_authors
     when '7' then app.add_book
     when '8' then app.add_music_album
