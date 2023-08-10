@@ -8,8 +8,9 @@ describe Author do
     it 'should add the item to the author' do
       item = Item.new('22-2-2023')
       author = Author.new('John', 'Doe')
+      author.add_item(item)
 
-      expect(author.add_item(item)).to include(item)
+      expect(author.items).to include(item)
     end
 
     it 'should return the item and the index of the item' do
@@ -18,12 +19,9 @@ describe Author do
 
       author = Author.new('Laurent', 'Zai')
       author.add_item(item2)
-
-      result = author.add_item(item)
-
-      expect(result).to be_an_instance_of(Array)
-      expect(result[0]).to eq(item2)
-      expect(result[1]).to eq(item)
+      author.add_item(item)
+      expect(author.items[0]).to eq(item2)
+      expect(author.items[1]).to eq(item)
     end
   end
 end
