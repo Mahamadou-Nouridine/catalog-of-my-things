@@ -21,7 +21,7 @@ class Genre
 
   def necessary_info
     {
-      'name' => @name,
+      'name' => @name
     }
   end
 end

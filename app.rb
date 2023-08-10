@@ -2,7 +2,6 @@ require_relative 'classes/music_album'
 require_relative 'classes/genre'
 require_relative 'classes/preserve_data'
 require_relative 'classes/get_item_metadata'
-require_relative 'classes/add_author'
 require_relative 'classes/game'
 require_relative 'classes/book'
 require_relative 'classes/label'
@@ -27,10 +26,10 @@ class App
     label = get_label('data/label.json', music)
     genre = get_genre('data/genres.json', music)
     music_album_hash = music.object_to_hash.merge({
-      'author' => author,
-      'label' => label,
-      'genre' => genre,
-    })
+                                                    'author' => author,
+                                                    'label' => label,
+                                                    'genre' => genre
+                                                  })
     @preserve_data.save('data/music_albums.json', music_album_hash)
     puts 'Music album added successfully!'
   end
@@ -47,10 +46,10 @@ class App
     label = get_label('data/label.json', book)
     genre = get_genre('data/genres.json', book)
     book_hash = book.object_to_hash.merge({
-      'author' => author,
-      'label' => label,
-      'genre' => genre,
-    })
+                                            'author' => author,
+                                            'label' => label,
+                                            'genre' => genre
+                                          })
     @preserve_data.save('data/books.json', book_hash)
     puts 'New book successfully added!'
   end
@@ -65,7 +64,8 @@ class App
       author = book['author']['first_name']
       label = book['label']['title']
       genre = book['genre']['name']
-      puts "\n[Book] Author:#{author} | Label: #{label} | Genre: #{genre} | Publisher : #{pname} | Published at: #{pdate} | Cover: #{state}\n\n"
+      print "\n[Book] Author:#{author} | Label: #{label} | Genre: #{genre} | "
+      print "Publisher : #{pname} | Published at: #{pdate} | Cover: #{state}\n\n"
     end
   end
 
@@ -80,11 +80,12 @@ class App
   def list_music_albums
     music_albums = @preserve_data.get_data('data/music_albums.json')
     puts 'The list is empty!' if music_albums.empty?
-    music_albums.each_with_index do |music, index|
+    music_albums.each_with_index do |music, _index|
       author = music['author'].nil? ? 'Unknown' : music['author']['first_name']
       genre = music['genre'].nil? ? 'Unknown' : music['genre']['name']
       label = music['label'].nil? ? 'Unknown' : music['label']['title']
-      puts "\n[Music Album] Author: #{author} | Genre: #{genre} | label: #{label} | Published at: #{music['publish_date']} | On spotify: #{music['on_spotify']}"
+      print "\n[Music Album] Author: #{author} | Genre: #{genre} | label: #{label} | "
+      print "Published at: #{music['publish_date']} | On spotify: #{music['on_spotify']}\n\n"
     end
   end
 
@@ -109,7 +110,8 @@ class App
       author = game['author']['first_name']
       label = game['label']['title']
       genre = game['genre']['name']
-      puts "\n[Game] Author: #{author} | Label: #{label} | Genre: #{genre}  Multiplayer : #{game['multiplayer']} | Last played_at: #{game['last_played']}\n"
+      print "\n[Game] Author: #{author} | Label: #{label} | Genre: #{genre} | "
+      print "Multiplayer : #{game['multiplayer']} | Last played_at: #{game['last_played']}\n\n"
     end
   end
 
@@ -128,11 +130,16 @@ class App
     author = get_author('data/authors.json', game)
     label = get_label('data/label.json', game)
     genre = get_genre('data/genres.json', game)
+    game.object_to_hash.merge({
+                                'author' => author,
+                                'label' => label,
+                                'genre' => genre
+                              })
     game_album_hash = game.object_to_hash.merge({
-      'author' => author,
-      'label' => label,
-      'genre' => genre,
-    })
+                                                  'author' => author,
+                                                  'label' => label,
+                                                  'genre' => genre
+                                                })
     @preserve_data.save('data/games.json', game_album_hash)
     puts "Game added successfully!\n"
   end

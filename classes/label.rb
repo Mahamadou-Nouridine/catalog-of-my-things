@@ -25,7 +25,7 @@ class Label
   def necessary_info
     {
       'title' => @title,
-      'color' => @color,
+      'color' => @color
     }
   end
 end
