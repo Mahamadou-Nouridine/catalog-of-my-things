@@ -2,7 +2,7 @@ require_relative '../../classes/book'
 require_relative '../../classes/item'
 
 describe Book do
-  let(:publish_date) { '01-01-01' }
+  let(:publish_date) { '01-01-2021' }
   let(:publisher) { 'Example Publisher' }
   let(:cover_state) { 'good' }
   let(:book) { Book.new(publish_date, publisher, cover_state) }
