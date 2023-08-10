@@ -115,8 +115,8 @@ class App
       author = game['author']['first_name']
       label = game['label']['title']
       genre = game['genre']['name']
-      print "\n[Game] Author: #{author} | Label: #{label} | Genre: #{genre} | "
-      print "Multiplayer : #{game['multiplayer']} | Publish date: #{game['publish_date']} | Last played_at: #{game['last_played']}"
+      print "\n[Game] Author: #{author} | Label: #{label} | Genre: #{genre} | Multiplayer : #{game['multiplayer']}"
+      print " | Publish date: #{game['publish_date']} | Last played_at: #{game['last_played']}"
     end
     puts "\n\n"
   end
